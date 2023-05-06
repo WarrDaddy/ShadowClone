@@ -51,8 +51,8 @@ def upload_to_bucket(chunk, keep_extension=False):
     bucket_name = config.STORAGE_BUCKET
 
     filename, ext = os.path.splitext(chunk)
-    f = open(chunk,'r')
-    contents = f.read()
+    with open(chunk,'r') as f:
+        contents = f.read()
     if keep_extension:
         upload_key = str(uuid.uuid4()) + ext
     else:
